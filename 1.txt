@@ -1,0 +1,703 @@
+1. WAP to find whether the inputted number is even or odd.
+import java.util.Scanner;
+public class EvenOdd {
+public static void main(String[] args) {
+Scanner sc = new Scanner(System.in);
+System.out.print("Enter a number: ");
+int num = sc.nextInt();
+if (num % 2 == 0) {
+System.out.println(num + " is even.");
+} else {
+System.out.println(num + " is odd.");
+}
+}
+}
+
+2. WAP to find the greatest among three numbers using if-else.
+import java.util.Scanner;
+public class GreatestOfThree {
+public static void main(String[] args) {
+Scanner sc = new Scanner(System.in);
+System.out.print("Enter three numbers: ");
+int a = sc.nextInt();
+int b = sc.nextInt();
+int c = sc.nextInt();
+if (a > b && a > c) {
+System.out.println(a + " is the greatest.");
+} else if (b > a && b > c) {
+System.out.println(b + " is the greatest.");
+} else {
+System.out.println(c + " is the greatest.");
+}
+}
+}
+
+3. WAP to find the sum and average of numbers from 1 to 10.
+public class SumAndAverage {
+public static void main(String[] args) {
+int sum = 0;
+for (int i = 1; i <= 10; i++) {
+sum += i;
+}
+double average = sum / 10.0;
+System.out.println("Sum: " + sum);
+System.out.println("Average: " + average);
+
+}
+}
+
+4. WAP to create a class called Circle.
+class Circle {
+private double radius = 1.0;
+// Default constructor
+Circle() {}
+// Parameterized constructor
+Circle(double radius) {
+this.radius = radius;
+}
+// Getter for radius
+public double getRadius() {
+return radius;
+}
+// Calculate area
+public double calculateArea() {
+return Math.PI * radius * radius;
+}
+// Calculate circumference
+public double calculateCircumference() {
+return 2 * Math.PI * radius;
+}
+}
+public class Main {
+public static void main(String[] args) {
+Circle circle1 = new Circle(); 
+Circle circle2 = new Circle(5.0); 
+System.out.println("Circle 1 - Radius: " + circle1.getRadius() + ", Area: " +
+circle1.calculateArea() + ", Circumference: " + circle1.calculateCircumference
+());
+System.out.println("Circle 2 - Radius: " + circle2.getRadius() + ", Area: "
++ circle2.calculateArea() + ", Circumference: " + circle2.calculateCircumferen
+ce());
+}
+}
+
+5. WAP to create a class called Square.
+class Square {
+private double side = 1.0;
+Square() {}
+Square(double side) {
+this.side = side;
+}
+public double getSide() {
+return side;
+}
+public double calculateArea() {
+return side * side;
+}
+}
+public class Main {
+public static void main(String[] args) {
+Square square1 = new Square(); // Default constructor
+Square square2 = new Square(5.0); // Parameterized constructor
+System.out.println("Square 1 - Side: " + square1.getSide() + ", Area: " + s
+quare1.calculateArea());
+System.out.println("Square 2 - Side: " + square2.getSide() + ", Area: " + s
+quare2.calculateArea());
+}
+}
+
+6. WAP to create a class called Rectangle.
+class Rectangle {
+private double length = 1.0;
+private double breadth = 1.0;
+
+Rectangle() {}
+
+Rectangle(double length, double breadth) {
+this.length = length;
+this.breadth = breadth;
+}
+
+public double getLength() {
+return length;
+}
+
+public double getBreadth() {
+return breadth;
+}
+
+public double calculateArea() {
+return length * breadth;
+}
+}
+public class Main {
+public static void main(String[] args) {
+Rectangle rectangle1 = new Rectangle(); // Default constructor
+Rectangle rectangle2 = new Rectangle(5.0, 10.0); // Parameterized constr
+uctor
+System.out.println("Rectangle 1 - Length: " + rectangle1.getLength() + ",
+Breadth: " + rectangle1.getBreadth() + ", Area: " + rectangle1.calculateArea());
+System.out.println("Rectangle 2 - Length: " + rectangle2.getLength() + ",
+Breadth: " + rectangle2.getBreadth() + ", Area: " + rectangle2.calculateArea
+());
+}
+}
+
+7 . WAP to demonstrate the sequence of execution of
+constructors in multilevel inheritance.
+class A {
+A() {
+System.out.println("Constructor of A");
+}
+}
+class B extends A {
+B() {
+System.out.println("Constructor of B");
+}
+}
+class C extends B {
+C() {
+System.out.println("Constructor of C");
+}
+}
+public class Main {
+public static void main(String[] args) {
+C obj = new C();
+}
+}
+
+8. WAP to create an object of String class and use methods.
+public class StringMethods {
+public static void main(String[] args) {
+String str = "Hello, World!";
+System.out.println("Length: " + str.length()); // 13
+System.out.println("Char at index 1: " + str.charAt(1)); // 'e'
+System.out.println("Index of 'World': " + str.indexOf("World")); // 7
+System.out.println("Substring: " + str.substring(7, 12)); // "World"
+System.out.println("Contains 'Hello': " + str.contains("Hello")); // true
+System.out.println("Compare to 'Hello': " + str.compareTo("Hello")); // Po
+sitive value
+}
+}
+
+
+9. WAP to create an object of StringBuilder class and use
+methods.
+public class StringBuilderMethods {
+public static void main(String[] args) {
+StringBuilder sb = new StringBuilder("Hello");
+sb.append(" World"); // Hello World
+sb.insert(5, ","); // Hello, World
+sb.replace(7, 12, " Java"); // Hello, Java
+sb.delete(5, 7); // HelloJava
+sb.reverse(); // avaJolleH
+System.out.println("Final String: " + sb.toString());
+}
+}
+
+10. WAP to create an ArrayList and use methods.
+import java.util.ArrayList;
+public class ArrayListMethods {
+public static void main(String[] args) {
+ArrayList<String> list = new ArrayList<>();
+list.add("Apple"); // [Apple]
+list.add("Banana"); // [Apple, Banana]
+list.add("Cherry"); // [Apple, Banana, Cherry]
+ArrayList<String> newList = new ArrayList<>();
+newList.add("Mango");
+newList.add("Orange");
+list.addAll(newList); // [Apple, Banana, Cherry, Mango, Orange]
+list.remove("Banana"); // [Apple, Cherry, Mango, Orange]
+System.out.println("Is list empty? " + list.isEmpty()); // false
+System.out.println("List: " + list);
+}
+}
+
+11. WAP to create a HashSet.
+import java.util.HashSet;
+import java.util.Iterator;
+public class HashSetExample {
+public static void main(String[] args) {
+HashSet<String> set = new HashSet<>();
+set.add("Apple"); // Add element
+set.add("Banana");
+set.add("Cherry");
+System.out.println("Number of elements: " + set.size()); // 3
+// Iterate through elements
+Iterator<String> itr = set.iterator();
+while (itr.hasNext()) {
+System.out.println(itr.next());
+}
+set.remove("Banana"); // Remove element
+System.out.println("Set after removal: " + set);
+}
+}
+
+12. WAP to demonstrate the sequence of execution of
+constructors in multilevel inheritance.
+class A {
+A() {
+System.out.println("Constructor of A");
+}
+}
+class B extends A {
+B() {
+System.out.println("Constructor of B");
+}
+}
+class C extends B {
+C() {
+System.out.println("Constructor of C");
+}
+}
+public class Main {
+public static void main(String[] args) {
+C obj = new C();
+}
+}
+
+13. WAP to create an object of String class and use methods.
+public class StringMethods {
+public static void main(String[] args) {
+String str = "Hello, World!";
+System.out.println("Length: " + str.length()); // 13
+System.out.println("Char at index 1: " + str.charAt(1)); // 'e'
+System.out.println("Index of 'World': " + str.indexOf("World")); // 7
+System.out.println("Substring: " + str.substring(7, 12)); // "World"
+System.out.println("Contains 'Hello': " + str.contains("Hello")); // true
+System.out.println("Compare to 'Hello': " + str.compareTo("Hello")); // Po
+sitive value
+}
+}
+
+14. WAP to create an object of StringBuilder class and use
+methods.
+public class StringBuilderMethods {
+public static void main(String[] args) {
+StringBuilder sb = new StringBuilder("Hello");
+sb.append(" World"); // Hello World
+sb.insert(5, ","); // Hello, World
+sb.replace(7, 12, " Java"); // Hello, Java
+sb.delete(5, 7); // HelloJava
+sb.reverse(); // avaJolleH
+System.out.println("Final String: " + sb.toString());
+}
+}
+
+
+15. WAP to create an ArrayList and use methods.
+import java.util.ArrayList;
+public class ArrayListMethods {
+public static void main(String[] args) {
+ArrayList<String> list = new ArrayList<>();
+list.add("Apple"); // [Apple]
+list.add("Banana"); // [Apple, Banana]
+list.add("Cherry"); // [Apple, Banana, Cherry]
+ArrayList<String> newList = new ArrayList<>();
+newList.add("Mango");
+newList.add("Orange");
+list.addAll(newList); // [Apple, Banana, Cherry, Mango, Orange]
+list.remove("Banana"); // [Apple, Cherry, Mango, Orange]
+System.out.println("Is list empty? " + list.isEmpty()); // false
+System.out.println("List: " + list);
+}
+}
+
+16. WAP to create a HashSet.
+import java.util.HashSet;
+import java.util.Iterator;
+public class HashSetExample {
+public static void main(String[] args) {
+HashSet<String> set = new HashSet<>();
+set.add("Apple"); // Add element
+set.add("Banana");
+set.add("Cherry");
+System.out.println("Number of elements: " + set.size()); // 3
+// Iterate through elements
+Iterator<String> itr = set.iterator();
+while (itr.hasNext()) {
+System.out.println(itr.next());
+}
+set.remove("Banana"); // Remove element
+System.out.println("Set after removal: " + set);
+}
+}
+17 . WAP to demonstrate the sequence of execution of
+constructors in multilevel inheritance.
+class A {
+A() {
+System.out.println("Constructor of A");
+}
+}
+class B extends A {
+B() {
+System.out.println("Constructor of B");
+}
+}
+class C extends B {
+C() {
+System.out.println("Constructor of C");
+}
+Java QB 47
+}
+public class Main {
+public static void main(String[] args) {
+C obj = new C();
+}
+}
+
+18. WAP to create an object of String class and use methods.
+public class StringMethods {
+public static void main(String[] args) {
+String str = "Hello, World!";
+System.out.println("Length: " + str.length()); // 13
+System.out.println("Char at index 1: " + str.charAt(1)); // 'e'
+System.out.println("Index of 'World': " + str.indexOf("World")); // 7
+System.out.println("Substring: " + str.substring(7, 12)); // "World"
+System.out.println("Contains 'Hello': " + str.contains("Hello")); // true
+System.out.println("Compare to 'Hello': " + str.compareTo("Hello")); // Po
+sitive value
+}
+}
+
+19. WAP to create an object of StringBuilder class and use
+methods.
+public class StringBuilderMethods {
+public static void main(String[] args) {
+StringBuilder sb = new StringBuilder("Hello");
+sb.append(" World"); // Hello World
+sb.insert(5, ","); // Hello, World
+sb.replace(7, 12, " Java"); // Hello, Java
+sb.delete(5, 7); // HelloJava
+sb.reverse(); // avaJolleH
+System.out.println("Final String: " + sb.toString());
+}
+}
+
+20. WAP to create an ArrayList and use methods.
+import java.util.ArrayList;
+public class ArrayListMethods {
+public static void main(String[] args) {
+ArrayList<String> list = new ArrayList<>();
+list.add("Apple"); // [Apple]
+list.add("Banana"); // [Apple, Banana]
+list.add("Cherry"); // [Apple, Banana, Cherry]
+ArrayList<String> newList = new ArrayList<>();
+newList.add("Mango");
+newList.add("Orange");
+list.addAll(newList); // [Apple, Banana, Cherry, Mango, Orange]
+list.remove("Banana"); // [Apple, Cherry, Mango, Orange]
+System.out.println("Is list empty? " + list.isEmpty()); // false
+System.out.println("List: " + list);
+}
+}
+
+21. WAP to create a HashSet.
+import java.util.HashSet;
+import java.util.Iterator;
+public class HashSetExample {
+public static void main(String[] args) {
+HashSet<String> set = new HashSet<>();
+set.add("Apple"); // Add element
+set.add("Banana");
+set.add("Cherry");
+System.out.println("Number of elements: " + set.size()); // 3
+// Iterate through elements
+Iterator<String> itr = set.iterator();
+while (itr.hasNext()) {
+System.out.println(itr.next());
+}
+set.remove("Banana"); // Remove element
+System.out.println("Set after removal: " + set);
+}
+}
+
+22. WAP to implement the following methods of LinkedList:
+import java.util.LinkedList;
+public class LinkedListMethods {
+public static void main(String[] args) {
+LinkedList<String> list = new LinkedList<>();
+list.add("Apple");
+list.add("Banana");
+list.add("Cherry");
+list.add("Mango");
+// i. Remove the last element
+list.removeLast();
+System.out.println("After removing last element: " + list);
+// ii. Retrieve but does not remove the last element
+String lastElement = list.getLast();
+System.out.println("Last element (retrieved but not removed): " + lastEle
+ment);
+// iii. Print all elements
+System.out.println("All elements in LinkedList:");
+for (String element : list) {
+System.out.println(element);
+}
+// iv. Remove all elements
+list.clear();
+System.out.println("After removing all elements: " + list);
+}
+}
+
+23. WAP to demonstrate how to read a text file using FileReader.
+import java.io.FileReader;
+import java.io.IOException;
+public class ReadFileExample {
+public static void main(String[] args) {
+try (FileReader fr = new FileReader("input.txt")) {
+int character;
+while ((character = fr.read()) != -1) {
+System.out.print((char) character);
+}
+} catch (IOException e) {
+e.printStackTrace();
+}
+}
+}
+
+24. WAP to demonstrate the constructors and methods of File
+class.
+import java.io.File;
+public class FileClassExample {
+public static void main(String[] args) {
+// Create a File object
+File file = new File("example.txt");
+// Check if the file exists
+if (file.exists()) {
+System.out.println("File exists.");
+} else {
+System.out.println("File does not exist.");
+}
+// Get file name
+System.out.println("File name: " + file.getName());
+// Get file path
+System.out.println("File path: " + file.getPath());
+// Check if it is a directory
+if (file.isDirectory()) {
+System.out.println("It is a directory.");
+} else {
+System.out.println("It is not a directory.");
+}
+// Delete the file
+if (file.delete()) {
+System.out.println("File deleted.");
+} else {
+System.out.println("Failed to delete the file.");
+}
+}
+}
+
+25. WAP to demonstrate how to write a text file using
+FileOutputStream.
+import java.io.FileOutputStream;
+import java.io.IOException;
+public class WriteFileExample {
+public static void main(String[] args) {
+String data = "Hello, World!";
+try (FileOutputStream fos = new FileOutputStream("output.txt")) {
+fos.write(data.getBytes());
+System.out.println("Data written to file.");
+} catch (IOException e) {
+e.printStackTrace();
+}
+}
+}
+
+
+26. Create a Java project with a package named shapes.
+Circle.java:
+package shapes;
+public class Circle {
+private double radius;
+public Circle(double radius) {
+this.radius = radius;
+}
+public double calculateArea() {
+return Math.PI * radius * radius;
+}
+public double calculatePerimeter() {
+return 2 * Math.PI * radius;
+}
+}
+Rectangle.java:
+package shapes;
+public class Rectangle {
+private double length;
+private double width;
+public Rectangle(double length, double width) {
+this.length = length;
+this.width = width;
+}
+public double calculateArea() {
+return length * width;
+}
+public double calculatePerimeter() {
+return 2 * (length + width);
+}
+}
+ShapeTest.java:
+import shapes.Circle;
+import shapes.Rectangle;
+public class ShapeTest {
+public static void main(String[] args) {
+Circle circle = new Circle(5.0);
+System.out.println("Circle Area: " + circle.calculateArea());
+System.out.println("Circle Perimeter: " + circle.calculatePerimeter());
+Rectangle rectangle = new Rectangle(4.0, 6.0);
+System.out.println("Rectangle Area: " + rectangle.calculateArea());
+System.out.println("Rectangle Perimeter: " + rectangle.calculatePerimete
+r());
+}
+}
+
+27 . Write a Java program to display all the vowels from a given
+string.
+public class VowelsInString {
+public static void main(String[] args) {
+String str = "Hello, World!";
+System.out.println("Vowels in the string:");
+for (char ch : str.toCharArray()) {
+if (isVowel(ch)) {
+System.out.print(ch + " ");
+}
+}
+}
+public static boolean isVowel(char ch) {
+ch = Character.toLowerCase(ch);
+return ch == 'a' || ch == 'e' || ch == 'i' || ch == 'o' || ch == 'u';
+}
+}
+
+28. Write a Java program to display alternate characters from a
+given string.
+public class AlternateCharacters {
+public static void main(String[] args) {
+String str = "Hello, World!";
+System.out.println("Alternate characters:");
+for (int i = 0; i < str.length(); i += 2) {
+System.out.print(str.charAt(i) + " ");
+}
+}
+}
+
+29. Create a Swing application that calculates the square of a
+number.
+import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+public class SquareCalculator extends JFrame implements ActionListener {
+JTextField inputField;
+JLabel resultLabel;
+SquareCalculator() {
+setTitle("Square Calculator");
+setSize(300, 200);
+setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+JPanel panel = new JPanel();
+inputField = new JTextField(10);
+JButton calculateButton = new JButton("Calculate");
+resultLabel = new JLabel("Result: ");
+calculateButton.addActionListener(this);
+panel.add(new JLabel("Enter a number:"));
+panel.add(inputField);
+panel.add(calculateButton);
+panel.add(resultLabel);
+add(panel);
+setVisible(true);
+}
+public void actionPerformed(ActionEvent e) {
+try {
+double num = Double.parseDouble(inputField.getText());
+double square = num * num;
+resultLabel.setText("Result: " + square);
+} catch (NumberFormatException ex) {
+resultLabel.setText("Invalid input!");
+}
+}
+public static void main(String[] args) {
+new SquareCalculator();
+}
+}
+
+30. Create a Swing application that calculates the area of a
+rectangle.
+import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+public class RectangleAreaCalculator extends JFrame implements ActionListe
+ner {
+JTextField lengthField, widthField;
+JLabel resultLabel;
+RectangleAreaCalculator() {
+setTitle("Rectangle Area Calculator");
+setSize(300, 200);
+setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+JPanel panel = new JPanel();
+lengthField = new JTextField(10);
+widthField = new JTextField(10);
+JButton calculateButton = new JButton("Calculate");
+resultLabel = new JLabel("Result: ");
+calculateButton.addActionListener(this);
+panel.add(new JLabel("Length:"));
+panel.add(lengthField);
+panel.add(new JLabel("Width:"));
+panel.add(widthField);
+panel.add(calculateButton);
+panel.add(resultLabel);
+add(panel);
+setVisible(true);
+}
+public void actionPerformed(ActionEvent e) {
+try {
+double length = Double.parseDouble(lengthField.getText());
+double width = Double.parseDouble(widthField.getText());
+double area = length * width;
+resultLabel.setText("Result: " + area);
+} catch (NumberFormatException ex) {
+resultLabel.setText("Invalid input!");
+}
+}
+public static void main(String[] args) {
+new RectangleAreaCalculator();
+}
+}
+
+31. Create a Swing application that adds two numbers.
+import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+public class AddTwoNumbers extends JFrame implements ActionListener {
+JTextField num1Field, num2Field;
+JLabel resultLabel;
+AddTwoNumbers() {
+setTitle("Add Two Numbers");
+setSize(300, 200);
+setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+JPanel panel = new JPanel();
+num1Field = new JTextField(10);
+num2Field = new JTextField(10);
+JButton addButton = new JButton("Add");
+resultLabel = new JLabel("Result: ");
+addButton.addActionListener(this);
+panel.add(new JLabel("Number 1:"));
+panel.add(num1Field);
+panel.add(new JLabel("Number 2:"));
+panel.add(num2Field);
+panel.add(addButton);
+panel.add(resultLabel);
+add(panel);
+setVisible(true);
+}
+public void actionPerformed(ActionEvent e) {
+try {
+double num1 = Double.parseDouble(num1Field.getText());
+double num2 = Double.parseDouble(num2Field.getText());
+double sum = num1 + num2;
+resultLabel.setText("Result: " + sum);
+} catch (NumberFormatException ex) {
+resultLabel.setText("Invalid input!");
+}
+}
+public static void main(String[] args) {
+new AddTwoNumbers();
+}
+}
