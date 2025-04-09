@@ -1,0 +1,1594 @@
+Here are the C++ implementations for the requested data structures and algorithms:
+
+**1. Linear Search**
+
+```cpp
+#include <iostream>
+#include <vector>
+
+// Function to perform linear search
+// arr: the vector to search in
+// target: the element to search for
+// Returns the index of the target element if found, otherwise -1
+int linearSearch(const std::vector<int>& arr, int target) {
+    for (int i = 0; i < arr.size(); ++i) {
+        if (arr[i] == target) {
+            return i; // Element found at index i
+        }
+    }
+    return -1; // Element not found
+}
+
+int main() {
+    std::vector<int> arr = {10, 23, 45, 70, 11, 15};
+    int target = 70;
+    int index = linearSearch(arr, target);
+
+    if (index != -1) {
+        std::cout << "Element " << target << " found at index: " << index << std::endl;
+    } else {
+        std::cout << "Element " << target << " not found in the array." << std::endl;
+    }
+    return 0;
+}
+2. Binary Search (Sorted Array)#include <iostream>
+#include <vector>
+#include <algorithm> // For std::sort
+
+// Function to perform binary search on a sorted array
+// arr: the sorted vector to search in
+// target: the element to search for
+// Returns the index of the target element if found, otherwise -1
+int binarySearch(const std::vector<int>& arr, int target) {
+    int left = 0;
+    int right = arr.size() - 1;
+
+    while (left <= right) {
+        int mid = left + (right - left) / 2; // Avoid potential overflow
+
+        if (arr[mid] == target) {
+            return mid; // Element found at index mid
+        } else if (arr[mid] < target) {
+            left = mid + 1; // Search in the right half
+        } else {
+            right = mid - 1; // Search in the left half
+        }
+    }
+    return -1; // Element not found
+}
+
+int main() {
+    std::vector<int> arr = {11, 15, 23, 45, 70, 85}; // Array must be sorted
+    int target = 45;
+    int index = binarySearch(arr, target);
+
+    if (index != -1) {
+        std::cout << "Element " << target << " found at index: " << index << std::endl;
+    } else {
+        std::cout << "Element " << target << " not found in the array." << std::endl;
+    }
+
+    target = 50;
+    index = binarySearch(arr, target);
+     if (index != -1) {
+        std::cout << "Element " << target << " found at index: " << index << std::endl;
+    } else {
+        std::cout << "Element " << target << " not found in the array." << std::endl;
+    }
+
+    return 0;
+}
+3. Bubble Sort#include <iostream>
+#include <vector>
+#include <utility> // For std::swap
+
+// Function to perform bubble sort
+// arr: the vector to be sorted (will be modified)
+void bubbleSort(std::vector<int>& arr) {
+    int n = arr.size();
+    bool swapped;
+    for (int i = 0; i < n - 1; ++i) {
+        swapped = false;
+        // Last i elements are already in place
+        for (int j = 0; j < n - i - 1; ++j) {
+            if (arr[j] > arr[j + 1]) {
+                std::swap(arr[j], arr[j + 1]);
+                swapped = true;
+            }
+        }
+        // If no two elements were swapped by inner loop, then array is sorted
+        if (!swapped) {
+            break;
+        }
+    }
+}
+
+// Helper function to print a vector
+void printArray(const std::vector<int>& arr) {
+    for (int x : arr) {
+        std::cout << x << " ";
+    }
+    std::cout << std::endl;
+}
+
+int main() {
+    std::vector<int> arr = {64, 34, 25, 12, 22, 11, 90};
+    std::cout << "Original array: ";
+    printArray(arr);
+
+    bubbleSort(arr);
+
+    std::cout << "Sorted array: ";
+    printArray(arr);
+    return 0;
+}
+4. Insertion Sort (Descending Order)#include <iostream>
+#include <vector>
+#include <utility> // For std::swap
+
+// Function to perform insertion sort in descending order
+// arr: the vector to be sorted (will be modified)
+void insertionSortDescending(std::vector<int>& arr) {
+    int n = arr.size();
+    for (int i = 1; i < n; ++i) {
+        int key = arr[i];
+        int j = i - 1;
+
+        // Move elements of arr[0..i-1], that are smaller than key,
+        // to one position ahead of their current position
+        while (j >= 0 && arr[j] < key) {
+            arr[j + 1] = arr[j];
+            j = j - 1;
+        }
+        arr[j + 1] = key;
+    }
+}
+
+// Helper function to print a vector
+void printArray(const std::vector<int>& arr) {
+    for (int x : arr) {
+        std::cout << x << " ";
+    }
+    std::cout << std::endl;
+}
+
+int main() {
+    std::vector<int> arr = {12, 11, 13, 5, 6};
+    std::cout << "Original array: ";
+    printArray(arr);
+
+    insertionSortDescending(arr);
+
+    std::cout << "Sorted array (descending): ";
+    printArray(arr);
+    return 0;
+}
+5. Selection Sort#include <iostream>
+#include <vector>
+#include <utility> // For std::swap
+
+// Function to perform selection sort
+// arr: the vector to be sorted (will be modified)
+void selectionSort(std::vector<int>& arr) {
+    int n = arr.size();
+    for (int i = 0; i < n - 1; ++i) {
+        // Find the minimum element in unsorted array
+        int min_idx = i;
+        for (int j = i + 1; j < n; ++j) {
+            if (arr[j] < arr[min_idx]) {
+                min_idx = j;
+            }
+        }
+        // Swap the found minimum element with the first element
+        if (min_idx != i) {
+           std::swap(arr[min_idx], arr[i]);
+        }
+    }
+}
+
+// Helper function to print a vector
+void printArray(const std::vector<int>& arr) {
+    for (int x : arr) {
+        std::cout << x << " ";
+    }
+    std::cout << std::endl;
+}
+
+int main() {
+    std::vector<int> arr = {64, 25, 12, 22, 11};
+    std::cout << "Original array: ";
+    printArray(arr);
+
+    selectionSort(arr);
+
+    std::cout << "Sorted array: ";
+    printArray(arr);
+    return 0;
+}
+6. Stack using Array (Push, Pop)#include <iostream>
+#include <vector>
+#include <stdexcept> // For exceptions
+
+#define MAX_SIZE 100 // Define maximum stack size
+
+class StackArray {
+private:
+    int arr[MAX_SIZE];
+    int top; // Index of the top element
+
+public:
+    // Constructor
+    StackArray() : top(-1) {} // Initialize top to -1 (empty stack)
+
+    // Check if the stack is full
+    bool isFull() {
+        return top == MAX_SIZE - 1;
+    }
+
+    // Check if the stack is empty
+    bool isEmpty() {
+        return top == -1;
+    }
+
+    // Push operation: Add an element to the top
+    void push(int value) {
+        if (isFull()) {
+            throw std::overflow_error("Stack Overflow: Cannot push element, stack is full.");
+        }
+        arr[++top] = value; // Increment top, then insert value
+        std::cout << value << " pushed to stack." << std::endl;
+    }
+
+    // Pop operation: Remove and return the top element
+    int pop() {
+        if (isEmpty()) {
+            throw std::underflow_error("Stack Underflow: Cannot pop element, stack is empty.");
+        }
+        int value = arr[top--]; // Get value, then decrement top
+        std::cout << value << " popped from stack." << std::endl;
+        return value;
+    }
+};
+
+int main() {
+    StackArray stack;
+
+    try {
+        stack.push(10);
+        stack.push(20);
+        stack.push(30);
+
+        stack.pop();
+        stack.pop();
+
+        stack.push(40);
+
+        stack.pop();
+        stack.pop();
+        // stack.pop(); // This would cause an underflow error
+
+    } catch (const std::overflow_error& e) {
+        std::cerr << "Error: " << e.what() << std::endl;
+    } catch (const std::underflow_error& e) {
+        std::cerr << "Error: " << e.what() << std::endl;
+    }
+
+    return 0;
+}
+7. Stack using Array (Peek, Display)#include <iostream>
+#include <vector>
+#include <stdexcept> // For exceptions
+
+#define MAX_SIZE 100 // Define maximum stack size
+
+class StackArrayPeekDisplay {
+private:
+    int arr[MAX_SIZE];
+    int top; // Index of the top element
+
+public:
+    // Constructor
+    StackArrayPeekDisplay() : top(-1) {} // Initialize top to -1 (empty stack)
+
+    // Check if the stack is full (needed for push)
+    bool isFull() {
+        return top == MAX_SIZE - 1;
+    }
+
+    // Check if the stack is empty
+    bool isEmpty() {
+        return top == -1;
+    }
+
+    // Push operation (needed for testing peek/display)
+    void push(int value) {
+        if (isFull()) {
+           std::cerr << "Stack Overflow! Cannot push " << value << std::endl;
+           return;
+        }
+        arr[++top] = value;
+    }
+
+     // Pop operation (needed for testing peek/display)
+    int pop() {
+        if (isEmpty()) {
+            std::cerr << "Stack Underflow! Cannot pop." << std::endl;
+            return -1; // Indicate error or throw exception
+        }
+        return arr[top--];
+    }
+
+    // Peek operation: Return the top element without removing it
+    int peek() {
+        if (isEmpty()) {
+            throw std::underflow_error("Stack Underflow: Cannot peek, stack is empty.");
+        }
+        return arr[top];
+    }
+
+    // Display operation: Print all elements in the stack
+    void display() {
+        if (isEmpty()) {
+            std::cout << "Stack is empty." << std::endl;
+            return;
+        }
+        std::cout << "Stack elements (top to bottom): ";
+        for (int i = top; i >= 0; --i) {
+            std::cout << arr[i] << " ";
+        }
+        std::cout << std::endl;
+    }
+};
+
+int main() {
+    StackArrayPeekDisplay stack;
+
+    stack.push(10);
+    stack.push(20);
+    stack.push(30);
+
+    stack.display();
+
+    try {
+        std::cout << "Top element (peek): " << stack.peek() << std::endl;
+    } catch (const std::underflow_error& e) {
+        std::cerr << "Error: " << e.what() << std::endl;
+    }
+
+    stack.pop();
+    stack.display();
+
+     try {
+        std::cout << "Top element after pop (peek): " << stack.peek() << std::endl;
+    } catch (const std::underflow_error& e) {
+        std::cerr << "Error: " << e.what() << std::endl;
+    }
+
+    stack.pop();
+    stack.pop();
+    stack.display(); // Should show stack is empty
+
+     try {
+        stack.peek(); // This would cause an underflow error
+    } catch (const std::underflow_error& e) {
+        std::cerr << "Error: " << e.what() << std::endl;
+    }
+
+
+    return 0;
+}
+8. Linear Queue using Array (Enqueue, Dequeue)#include <iostream>
+#include <vector>
+#include <stdexcept>
+
+#define MAX_QUEUE_SIZE 100
+
+class LinearQueue {
+private:
+    int arr[MAX_QUEUE_SIZE];
+    int front; // Index of the front element
+    int rear;  // Index of the rear element
+
+public:
+    // Constructor
+    LinearQueue() : front(-1), rear(-1) {} // Initialize queue as empty
+
+    // Check if the queue is full
+    bool isFull() {
+        return rear == MAX_QUEUE_SIZE - 1;
+    }
+
+    // Check if the queue is empty
+    bool isEmpty() {
+        return front == -1 || front > rear; // front > rear handles case after all elements dequeued
+    }
+
+    // Enqueue operation: Add an element to the rear
+    void enqueue(int value) {
+        if (isFull()) {
+            throw std::overflow_error("Queue Overflow: Cannot enqueue, queue is full.");
+        }
+        if (front == -1) { // If queue is initially empty
+            front = 0;
+        }
+        arr[++rear] = value; // Increment rear, then insert
+        std::cout << value << " enqueued to queue." << std::endl;
+    }
+
+    // Dequeue operation: Remove and return the front element
+    int dequeue() {
+        if (isEmpty()) {
+            throw std::underflow_error("Queue Underflow: Cannot dequeue, queue is empty.");
+        }
+        int value = arr[front++]; // Get value, then increment front
+        std::cout << value << " dequeued from queue." << std::endl;
+
+        // Optional: Reset queue if it becomes empty after dequeue
+        if (front > rear) {
+             front = rear = -1;
+             std::cout << "(Queue reset to empty state)" << std::endl;
+        }
+        return value;
+    }
+};
+
+int main() {
+    LinearQueue queue;
+
+    try {
+        queue.enqueue(10);
+        queue.enqueue(20);
+        queue.enqueue(30);
+
+        queue.dequeue();
+        queue.dequeue();
+
+        queue.enqueue(40);
+        queue.enqueue(50);
+
+        queue.dequeue();
+        queue.dequeue();
+        queue.dequeue(); // Dequeues 40
+       // queue.dequeue(); // This would cause an underflow error
+
+    } catch (const std::overflow_error& e) {
+        std::cerr << "Error: " << e.what() << std::endl;
+    } catch (const std::underflow_error& e) {
+        std::cerr << "Error: " << e.what() << std::endl;
+    }
+
+    return 0;
+}
+9. Linear Queue using Array (Dequeue, Display)#include <iostream>
+#include <vector>
+#include <stdexcept>
+
+#define MAX_QUEUE_SIZE 100
+
+class LinearQueueDisplay {
+private:
+    int arr[MAX_QUEUE_SIZE];
+    int front; // Index of the front element
+    int rear;  // Index of the rear element
+
+public:
+    // Constructor
+    LinearQueueDisplay() : front(-1), rear(-1) {} // Initialize queue as empty
+
+     // Check if the queue is full (needed for enqueue)
+    bool isFull() {
+        return rear == MAX_QUEUE_SIZE - 1;
+    }
+
+    // Check if the queue is empty
+    bool isEmpty() {
+        return front == -1 || front > rear;
+    }
+
+     // Enqueue operation (needed for testing)
+    void enqueue(int value) {
+        if (isFull()) {
+            std::cerr << "Queue Overflow! Cannot enqueue " << value << std::endl;
+            return;
+        }
+        if (front == -1) {
+            front = 0;
+        }
+        arr[++rear] = value;
+    }
+
+    // Dequeue operation: Remove and return the front element
+    int dequeue() {
+        if (isEmpty()) {
+            throw std::underflow_error("Queue Underflow: Cannot dequeue, queue is empty.");
+        }
+        int value = arr[front++];
+        std::cout << value << " dequeued from queue." << std::endl;
+
+        // Reset queue if it becomes empty after dequeue
+        if (front > rear) {
+             front = rear = -1;
+             std::cout << "(Queue reset to empty state)" << std::endl;
+        }
+        return value;
+    }
+
+    // Display operation: Print all elements in the queue
+    void display() {
+        if (isEmpty()) {
+            std::cout << "Queue is empty." << std::endl;
+            return;
+        }
+        std::cout << "Queue elements (front to rear): ";
+        for (int i = front; i <= rear; ++i) {
+            std::cout << arr[i] << " ";
+        }
+        std::cout << std::endl;
+    }
+};
+
+int main() {
+    LinearQueueDisplay queue;
+
+    queue.enqueue(10);
+    queue.enqueue(20);
+    queue.enqueue(30);
+
+    queue.display();
+
+    try {
+        queue.dequeue();
+        queue.display();
+
+        queue.dequeue();
+        queue.display();
+
+        queue.enqueue(40);
+        queue.display();
+
+        queue.dequeue(); // Dequeues 30
+        queue.display();
+
+        queue.dequeue(); // Dequeues 40, queue becomes empty
+        queue.display();
+
+       // queue.dequeue(); // This would cause an underflow error
+    } catch (const std::underflow_error& e) {
+        std::cerr << "Error: " << e.what() << std::endl;
+    }
+
+    return 0;
+}
+10. Circular Queue using Array (Enqueue, Display)#include <iostream>
+#include <vector>
+#include <stdexcept>
+
+#define CQUEUE_SIZE 5 // Define a smaller size for easier testing
+
+class CircularQueue {
+private:
+    int arr[CQUEUE_SIZE];
+    int front;
+    int rear;
+    int count; // Keep track of the number of elements
+
+public:
+    // Constructor
+    CircularQueue() : front(-1), rear(-1), count(0) {}
+
+    // Check if the queue is full
+    bool isFull() {
+        return count == CQUEUE_SIZE;
+        // Alternative check: return (front == 0 && rear == CQUEUE_SIZE - 1) || (rear == (front - 1) % (CQUEUE_SIZE));
+    }
+
+    // Check if the queue is empty
+    bool isEmpty() {
+       return count == 0;
+       // Alternative check: return front == -1;
+    }
+
+    // Enqueue operation: Add an element to the rear (circularly)
+    void enqueue(int value) {
+        if (isFull()) {
+            throw std::overflow_error("Circular Queue Overflow: Cannot enqueue, queue is full.");
+        }
+        if (front == -1) { // If queue is initially empty
+            front = 0;
+        }
+        rear = (rear + 1) % CQUEUE_SIZE; // Move rear circularly
+        arr[rear] = value;
+        count++; // Increment element count
+        std::cout << value << " enqueued to circular queue." << std::endl;
+    }
+
+     // Dequeue operation (needed for testing display after wrap-around)
+    int dequeue() {
+        if (isEmpty()) {
+             std::cerr << "Circular Queue Underflow! Cannot dequeue." << std::endl;
+             return -1; // Or throw exception
+        }
+        int value = arr[front];
+        if (front == rear) { // If only one element was present
+            front = rear = -1;
+        } else {
+            front = (front + 1) % CQUEUE_SIZE; // Move front circularly
+        }
+        count--; // Decrement element count
+        return value;
+    }
+
+
+    // Display operation: Print all elements in the circular queue
+    void display() {
+        if (isEmpty()) {
+            std::cout << "Circular Queue is empty." << std::endl;
+            return;
+        }
+        std::cout << "Circular Queue elements (front to rear): ";
+        int i = front;
+        int displayed_count = 0;
+        while(displayed_count < count) {
+             std::cout << arr[i] << " ";
+             i = (i + 1) % CQUEUE_SIZE;
+             displayed_count++;
+        }
+        std::cout << std::endl;
+        std::cout << "(Front: " << front << ", Rear: " << rear << ", Count: " << count << ")" << std::endl;
+    }
+};
+
+int main() {
+    CircularQueue cqueue;
+
+    try {
+        cqueue.enqueue(10);
+        cqueue.enqueue(20);
+        cqueue.enqueue(30);
+        cqueue.display();
+
+        cqueue.enqueue(40);
+        cqueue.enqueue(50); // Queue is now full
+        cqueue.display();
+
+        // cqueue.enqueue(60); // This would cause an overflow error
+
+        // Dequeue some elements to test wrap-around enqueue
+        cqueue.dequeue();
+        cqueue.dequeue();
+        cqueue.display();
+
+        cqueue.enqueue(60); // Enqueues at index 0
+        cqueue.display();
+        cqueue.enqueue(70); // Enqueues at index 1
+        cqueue.display();
+
+
+    } catch (const std::overflow_error& e) {
+        std::cerr << "Error: " << e.what() << std::endl;
+    } catch (const std::underflow_error& e) { // Though not explicitly tested here
+        std::cerr << "Error: " << e.what() << std::endl;
+    }
+
+    return 0;
+}
+11. Circular Queue using Array (Dequeue, Display)#include <iostream>
+#include <vector>
+#include <stdexcept>
+
+#define CQUEUE_SIZE 5
+
+class CircularQueueDequeueDisplay {
+private:
+    int arr[CQUEUE_SIZE];
+    int front;
+    int rear;
+    int count;
+
+public:
+    // Constructor
+    CircularQueueDequeueDisplay() : front(-1), rear(-1), count(0) {}
+
+    // Check if the queue is full
+    bool isFull() {
+        return count == CQUEUE_SIZE;
+    }
+
+    // Check if the queue is empty
+    bool isEmpty() {
+        return count == 0;
+    }
+
+    // Enqueue operation (needed for testing)
+    void enqueue(int value) {
+        if (isFull()) {
+            std::cerr << "Circular Queue Overflow! Cannot enqueue " << value << std::endl;
+            return;
+        }
+        if (front == -1) {
+            front = 0;
+        }
+        rear = (rear + 1) % CQUEUE_SIZE;
+        arr[rear] = value;
+        count++;
+    }
+
+    // Dequeue operation: Remove and return the front element (circularly)
+    int dequeue() {
+        if (isEmpty()) {
+            throw std::underflow_error("Circular Queue Underflow: Cannot dequeue, queue is empty.");
+        }
+        int value = arr[front];
+        std::cout << value << " dequeued from circular queue." << std::endl;
+
+        if (front == rear) { // If only one element was present
+            front = rear = -1; // Reset queue to empty
+        } else {
+            front = (front + 1) % CQUEUE_SIZE; // Move front circularly
+        }
+        count--; // Decrement element count
+        return value;
+    }
+
+    // Display operation: Print all elements in the circular queue
+    void display() {
+         if (isEmpty()) {
+            std::cout << "Circular Queue is empty." << std::endl;
+            return;
+        }
+        std::cout << "Circular Queue elements (front to rear): ";
+        int i = front;
+        int displayed_count = 0;
+        while(displayed_count < count) {
+             std::cout << arr[i] << " ";
+             i = (i + 1) % CQUEUE_SIZE;
+             displayed_count++;
+        }
+        std::cout << std::endl;
+        std::cout << "(Front: " << front << ", Rear: " << rear << ", Count: " << count << ")" << std::endl;
+    }
+};
+
+int main() {
+    CircularQueueDequeueDisplay cqueue;
+
+    cqueue.enqueue(1);
+    cqueue.enqueue(2);
+    cqueue.enqueue(3);
+    cqueue.enqueue(4);
+    cqueue.enqueue(5); // Full
+
+    cqueue.display();
+
+    try {
+        cqueue.dequeue(); // Dequeue 1
+        cqueue.display();
+
+        cqueue.dequeue(); // Dequeue 2
+        cqueue.display();
+
+        cqueue.enqueue(6); // Enqueue 6 at index 0
+        cqueue.display();
+
+        cqueue.dequeue(); // Dequeue 3
+        cqueue.display();
+
+        cqueue.dequeue(); // Dequeue 4
+        cqueue.dequeue(); // Dequeue 5
+        cqueue.dequeue(); // Dequeue 6
+        cqueue.display(); // Should be empty
+
+        // cqueue.dequeue(); // This would cause an underflow error
+
+    } catch (const std::underflow_error& e) {
+        std::cerr << "Error: " << e.what() << std::endl;
+    }
+
+    return 0;
+}
+12. Double Ended Queue (Deque) using Array (Enqueue Front, Display)#include <iostream>
+#include <vector>
+#include <stdexcept>
+
+#define DEQUE_SIZE 5
+
+class DequeArray {
+private:
+    int arr[DEQUE_SIZE];
+    int front;
+    int rear;
+    int count;
+
+public:
+    // Constructor
+    DequeArray() : front(-1), rear(-1), count(0) {}
+
+    // Check if the deque is full
+    bool isFull() {
+        return count == DEQUE_SIZE;
+    }
+
+    // Check if the deque is empty
+    bool isEmpty() {
+        return count == 0;
+    }
+
+    // Enqueue at Front operation
+    void enqueueFront(int value) {
+        if (isFull()) {
+            throw std::overflow_error("Deque Overflow: Cannot enqueue at front, deque is full.");
+        }
+        if (front == -1) { // If deque is initially empty
+            front = 0;
+            rear = 0;
+        } else if (front == 0) { // If front is at the beginning, wrap around
+            front = DEQUE_SIZE - 1;
+        } else { // Decrement front
+            front = front - 1;
+        }
+        arr[front] = value;
+        count++;
+        std::cout << value << " enqueued at front." << std::endl;
+    }
+
+     // Enqueue at Rear operation (needed for testing display)
+    void enqueueRear(int value) {
+         if (isFull()) {
+             std::cerr << "Deque Overflow! Cannot enqueue " << value << " at rear." << std::endl;
+             return;
+         }
+         if (front == -1) { // If queue is initially empty
+             front = 0;
+             rear = 0;
+         } else {
+             rear = (rear + 1) % DEQUE_SIZE; // Move rear circularly
+         }
+         arr[rear] = value;
+         count++;
+     }
+
+    // Dequeue from Front (needed for testing display)
+    int dequeueFront() {
+        if (isEmpty()) {
+            std::cerr << "Deque Underflow! Cannot dequeue from front." << std::endl;
+            return -1; // Or throw
+        }
+        int value = arr[front];
+        if (front == rear) { // Only one element
+            front = rear = -1;
+        } else {
+            front = (front + 1) % DEQUE_SIZE;
+        }
+        count--;
+        return value;
+    }
+
+    // Dequeue from Rear (needed for testing display)
+     int dequeueRear() {
+         if (isEmpty()) {
+             std::cerr << "Deque Underflow! Cannot dequeue from rear." << std::endl;
+             return -1; // Or throw
+         }
+         int value = arr[rear];
+         if (front == rear) { // Only one element
+             front = rear = -1;
+         } else if (rear == 0) {
+             rear = DEQUE_SIZE - 1; // Wrap around
+         } else {
+             rear = rear - 1;
+         }
+         count--;
+         return value;
+     }
+
+
+    // Display operation: Print all elements in the deque
+    void display() {
+        if (isEmpty()) {
+            std::cout << "Deque is empty." << std::endl;
+            return;
+        }
+        std::cout << "Deque elements (front to rear): ";
+        int i = front;
+        int displayed_count = 0;
+        while (displayed_count < count) {
+            std::cout << arr[i] << " ";
+            i = (i + 1) % DEQUE_SIZE;
+            displayed_count++;
+        }
+        std::cout << std::endl;
+         std::cout << "(Front: " << front << ", Rear: " << rear << ", Count: " << count << ")" << std::endl;
+    }
+};
+
+int main() {
+    DequeArray deque;
+
+    try {
+        deque.enqueueFront(10);
+        deque.display();
+        deque.enqueueFront(5); // Enqueues at index 4 (wraps around)
+        deque.display();
+        deque.enqueueRear(20);
+        deque.display();
+        deque.enqueueFront(1); // Enqueues at index 3
+        deque.display();
+        deque.enqueueRear(30); // Fills the deque
+        deque.display();
+
+        // deque.enqueueFront(0); // This would cause overflow
+
+        deque.dequeueRear(); // Dequeue 30
+        deque.display();
+        deque.enqueueFront(0); // Enqueues at index 2
+        deque.display();
+
+
+    } catch (const std::overflow_error& e) {
+        std::cerr << "Error: " << e.what() << std::endl;
+    } catch (const std::underflow_error& e) { // Though not explicitly tested here
+        std::cerr << "Error: " << e.what() << std::endl;
+    }
+
+    return 0;
+}
+13. Singly Linked List (Insert at Position, Display)#include <iostream>
+
+// Node structure for the singly linked list
+struct Node {
+    int data;
+    Node* next;
+
+    // Constructor
+    Node(int val) : data(val), next(nullptr) {}
+};
+
+class SinglyLinkedListPos {
+private:
+    Node* head;
+
+public:
+    // Constructor
+    SinglyLinkedListPos() : head(nullptr) {}
+
+    // Destructor to free memory
+    ~SinglyLinkedListPos() {
+        Node* current = head;
+        Node* nextNode = nullptr;
+        while (current != nullptr) {
+            nextNode = current->next;
+            delete current;
+            current = nextNode;
+        }
+        head = nullptr;
+    }
+
+    // Insert a new node at a specific position (1-based index)
+    void insertAtPosition(int data, int position) {
+        Node* newNode = new Node(data);
+
+        // If inserting at the beginning (position 1)
+        if (position <= 0) {
+             std::cerr << "Error: Position must be positive." << std::endl;
+             delete newNode; // Clean up allocated node
+             return;
+        }
+
+        if (position == 1) {
+            newNode->next = head;
+            head = newNode;
+            std::cout << data << " inserted at position " << position << "." << std::endl;
+            return;
+        }
+
+        // Traverse to the node just before the desired position
+        Node* temp = head;
+        // We need to stop at the (position - 2)th node (0-based)
+        // or (position - 1)th node (1-based counting from head)
+        for (int i = 1; temp != nullptr && i < position - 1; ++i) {
+            temp = temp->next;
+        }
+
+        // If position is out of bounds (greater than list size + 1)
+        if (temp == nullptr) {
+            std::cerr << "Error: Position " << position << " is out of bounds." << std::endl;
+            delete newNode; // Clean up allocated node
+            return;
+        }
+
+        // Insert the new node
+        newNode->next = temp->next;
+        temp->next = newNode;
+        std::cout << data << " inserted at position " << position << "." << std::endl;
+    }
+
+    // Display the linked list
+    void display() {
+        if (head == nullptr) {
+            std::cout << "Linked List is empty." << std::endl;
+            return;
+        }
+        std::cout << "Linked List: ";
+        Node* temp = head;
+        while (temp != nullptr) {
+            std::cout << temp->data << " -> ";
+            temp = temp->next;
+        }
+        std::cout << "nullptr" << std::endl;
+    }
+};
+
+int main() {
+    SinglyLinkedListPos list;
+
+    list.insertAtPosition(10, 1); // Insert at beginning
+    list.display();
+    list.insertAtPosition(30, 2); // Insert after 10
+    list.display();
+    list.insertAtPosition(20, 2); // Insert between 10 and 30
+    list.display();
+    list.insertAtPosition(40, 4); // Insert at the end
+    list.display();
+
+    list.insertAtPosition(5, 1); // Insert at beginning again
+    list.display();
+
+    // Test out of bounds
+    list.insertAtPosition(100, 7);
+    list.insertAtPosition(100, 0);
+
+    return 0;
+}
+14. Singly Linked List (Insert at End, Display)#include <iostream>
+
+// Node structure (same as before)
+struct Node {
+    int data;
+    Node* next;
+    Node(int val) : data(val), next(nullptr) {}
+};
+
+class SinglyLinkedListEnd {
+private:
+    Node* head;
+
+public:
+    // Constructor
+    SinglyLinkedListEnd() : head(nullptr) {}
+
+    // Destructor (same as before)
+    ~SinglyLinkedListEnd() {
+        Node* current = head;
+        Node* nextNode = nullptr;
+        while (current != nullptr) {
+            nextNode = current->next;
+            delete current;
+            current = nextNode;
+        }
+        head = nullptr;
+    }
+
+    // Insert a new node at the end of the list
+    void insertAtEnd(int data) {
+        Node* newNode = new Node(data);
+
+        // If the list is empty, make the new node the head
+        if (head == nullptr) {
+            head = newNode;
+            std::cout << data << " inserted at the end (list was empty)." << std::endl;
+            return;
+        }
+
+        // Traverse to the last node
+        Node* temp = head;
+        while (temp->next != nullptr) {
+            temp = temp->next;
+        }
+
+        // Attach the new node to the end
+        temp->next = newNode;
+        std::cout << data << " inserted at the end." << std::endl;
+    }
+
+    // Display the linked list (same as before)
+    void display() {
+        if (head == nullptr) {
+            std::cout << "Linked List is empty." << std::endl;
+            return;
+        }
+        std::cout << "Linked List: ";
+        Node* temp = head;
+        while (temp != nullptr) {
+            std::cout << temp->data << " -> ";
+            temp = temp->next;
+        }
+        std::cout << "nullptr" << std::endl;
+    }
+};
+
+int main() {
+    SinglyLinkedListEnd list;
+
+    list.insertAtEnd(10);
+    list.display();
+    list.insertAtEnd(20);
+    list.display();
+    list.insertAtEnd(30);
+    list.display();
+
+    return 0;
+}
+15. Circular Linked List (Insert at Beginning, Display)#include <iostream>
+
+// Node structure for the circular linked list
+struct CNode {
+    int data;
+    CNode* next;
+
+    CNode(int val) : data(val), next(nullptr) {}
+};
+
+class CircularLinkedListBegin {
+private:
+    CNode* last; // Pointer to the last node
+
+public:
+    // Constructor
+    CircularLinkedListBegin() : last(nullptr) {}
+
+    // Destructor to free memory
+    ~CircularLinkedListBegin() {
+        if (last == nullptr) return;
+
+        CNode* current = last->next; // Start from the first node
+        CNode* nextNode = nullptr;
+        CNode* head = last->next; // Keep track of head to stop deletion
+
+        do {
+             nextNode = current->next;
+             // std::cout << "Deleting node with data: " << current->data << std::endl; // Debugging
+             delete current;
+             current = nextNode;
+        } while (current != head && current != nullptr); // Ensure termination even if list becomes corrupted
+
+        last = nullptr; // Important: Reset last pointer
+    }
+
+
+    // Insert a new node at the beginning
+    void insertAtBeginning(int data) {
+        CNode* newNode = new CNode(data);
+
+        // If the list is empty
+        if (last == nullptr) {
+            last = newNode;
+            newNode->next = newNode; // Point to itself
+        } else {
+            newNode->next = last->next; // New node points to the current first node
+            last->next = newNode;      // Last node points to the new node (making it first)
+        }
+        std::cout << data << " inserted at the beginning." << std::endl;
+    }
+
+    // Display the circular linked list
+    void display() {
+        if (last == nullptr) {
+            std::cout << "Circular Linked List is empty." << std::endl;
+            return;
+        }
+
+        std::cout << "Circular Linked List: ";
+        CNode* temp = last->next; // Start from the first node
+
+        do {
+            std::cout << temp->data << " -> ";
+            temp = temp->next;
+        } while (temp != last->next); // Loop until we reach the first node again
+
+        std::cout << "(head:" << last->next->data << ")" << std::endl; // Indicate loop
+    }
+};
+
+int main() {
+    CircularLinkedListBegin clist;
+
+    clist.insertAtBeginning(30);
+    clist.display();
+    clist.insertAtBeginning(20);
+    clist.display();
+    clist.insertAtBeginning(10);
+    clist.display();
+
+    return 0;
+}
+16. Circular Linked List (Insert at End, Display)#include <iostream>
+
+// Node structure (same as before)
+struct CNode {
+    int data;
+    CNode* next;
+    CNode(int val) : data(val), next(nullptr) {}
+};
+
+class CircularLinkedListEnd {
+private:
+    CNode* last; // Pointer to the last node
+
+public:
+    // Constructor
+    CircularLinkedListEnd() : last(nullptr) {}
+
+     // Destructor (same as before)
+    ~CircularLinkedListEnd() {
+        if (last == nullptr) return;
+        CNode* current = last->next;
+        CNode* nextNode = nullptr;
+        CNode* head = last->next;
+        do {
+             nextNode = current->next;
+             delete current;
+             current = nextNode;
+        } while (current != head && current != nullptr);
+        last = nullptr;
+    }
+
+    // Insert a new node at the end
+    void insertAtEnd(int data) {
+        CNode* newNode = new CNode(data);
+
+        // If the list is empty
+        if (last == nullptr) {
+            last = newNode;
+            newNode->next = newNode; // Point to itself
+            std::cout << data << " inserted at the end (list was empty)." << std::endl;
+        } else {
+            newNode->next = last->next; // New node points to the first node
+            last->next = newNode;      // Current last node points to the new node
+            last = newNode;            // Update last pointer to the new node
+            std::cout << data << " inserted at the end." << std::endl;
+        }
+    }
+
+    // Display the circular linked list (same as before)
+    void display() {
+        if (last == nullptr) {
+            std::cout << "Circular Linked List is empty." << std::endl;
+            return;
+        }
+        std::cout << "Circular Linked List: ";
+        CNode* temp = last->next; // Start from the first node
+        do {
+            std::cout << temp->data << " -> ";
+            temp = temp->next;
+        } while (temp != last->next);
+        std::cout << "(head:" << last->next->data << ")" << std::endl;
+    }
+};
+
+int main() {
+    CircularLinkedListEnd clist;
+
+    clist.insertAtEnd(10);
+    clist.display();
+    clist.insertAtEnd(20);
+    clist.display();
+    clist.insertAtEnd(30);
+    clist.display();
+
+    return 0;
+}
+17. Stack using Linked List (Push, Pop)#include <iostream>
+#include <stdexcept>
+
+// Node structure for the linked list stack
+struct StackNode {
+    int data;
+    StackNode* next;
+
+    StackNode(int val) : data(val), next(nullptr) {}
+};
+
+class StackLinkedList {
+private:
+    StackNode* top; // Pointer to the top of the stack (head of the list)
+
+public:
+    // Constructor
+    StackLinkedList() : top(nullptr) {}
+
+    // Destructor to free memory
+    ~StackLinkedList() {
+        while (!isEmpty()) {
+            pop(); // Pop all elements to free memory
+        }
+    }
+
+    // Check if the stack is empty
+    bool isEmpty() {
+        return top == nullptr;
+    }
+
+    // Push operation: Add an element to the top (beginning of the list)
+    void push(int value) {
+        StackNode* newNode = new StackNode(value);
+        newNode->next = top; // New node points to the current top
+        top = newNode;       // Update top to the new node
+        std::cout << value << " pushed to stack." << std::endl;
+    }
+
+    // Pop operation: Remove and return the top element
+    int pop() {
+        if (isEmpty()) {
+            throw std::underflow_error("Stack Underflow: Cannot pop, stack is empty.");
+        }
+        StackNode* temp = top;    // Store current top
+        int poppedValue = top->data; // Get data from the top node
+        top = top->next;          // Move top to the next node
+        delete temp;              // Free the memory of the old top node
+        std::cout << poppedValue << " popped from stack." << std::endl;
+        return poppedValue;
+    }
+
+    // Peek operation (optional but useful)
+    int peek() {
+         if (isEmpty()) {
+            throw std::underflow_error("Stack Underflow: Cannot peek, stack is empty.");
+        }
+        return top->data;
+    }
+};
+
+int main() {
+    StackLinkedList stack;
+
+    try {
+        stack.push(10);
+        stack.push(20);
+        stack.push(30);
+
+        std::cout << "Top element (peek): " << stack.peek() << std::endl;
+
+        stack.pop();
+        stack.pop();
+
+        std::cout << "Top element (peek): " << stack.peek() << std::endl;
+
+        stack.push(40);
+        std::cout << "Top element (peek): " << stack.peek() << std::endl;
+
+
+        stack.pop();
+        stack.pop();
+        // stack.pop(); // This would cause an underflow error
+
+    } catch (const std::underflow_error& e) {
+        std::cerr << "Error: " << e.what() << std::endl;
+    }
+
+    return 0;
+}
+18. Doubly Linked List (Insert at End, Display)#include <iostream>
+
+// Node structure for the doubly linked list
+struct DNode {
+    int data;
+    DNode* prev;
+    DNode* next;
+
+    DNode(int val) : data(val), prev(nullptr), next(nullptr) {}
+};
+
+class DoublyLinkedListEnd {
+private:
+    DNode* head;
+    DNode* tail; // Keep track of the tail for efficient insertion at end
+
+public:
+    // Constructor
+    DoublyLinkedListEnd() : head(nullptr), tail(nullptr) {}
+
+    // Destructor to free memory
+    ~DoublyLinkedListEnd() {
+        DNode* current = head;
+        DNode* nextNode = nullptr;
+        while (current != nullptr) {
+            nextNode = current->next;
+            delete current;
+            current = nextNode;
+        }
+        head = tail = nullptr;
+    }
+
+    // Insert a new node at the end
+    void insertAtEnd(int data) {
+        DNode* newNode = new DNode(data);
+
+        // If the list is empty
+        if (head == nullptr) {
+            head = newNode;
+            tail = newNode;
+        } else {
+            tail->next = newNode; // Current tail's next points to the new node
+            newNode->prev = tail; // New node's prev points to the current tail
+            tail = newNode;       // Update the tail pointer
+        }
+        std::cout << data << " inserted at the end." << std::endl;
+    }
+
+    // Display the doubly linked list (forward)
+    void displayForward() {
+        if (head == nullptr) {
+            std::cout << "Doubly Linked List is empty." << std::endl;
+            return;
+        }
+        std::cout << "List (Forward):  nullptr <=> ";
+        DNode* temp = head;
+        while (temp != nullptr) {
+            std::cout << temp->data << " <=> ";
+            temp = temp->next;
+        }
+        std::cout << "nullptr" << std::endl;
+    }
+
+     // Display the doubly linked list (backward) - Optional but good for verification
+    void displayBackward() {
+        if (tail == nullptr) {
+            std::cout << "Doubly Linked List is empty." << std::endl;
+            return;
+        }
+        std::cout << "List (Backward): nullptr <=> ";
+        DNode* temp = tail;
+        while (temp != nullptr) {
+            std::cout << temp->data << " <=> ";
+            temp = temp->prev;
+        }
+        std::cout << "nullptr" << std::endl;
+    }
+};
+
+int main() {
+    DoublyLinkedListEnd dlist;
+
+    dlist.insertAtEnd(10);
+    dlist.displayForward();
+    dlist.insertAtEnd(20);
+    dlist.displayForward();
+    dlist.insertAtEnd(30);
+    dlist.displayForward();
+    dlist.displayBackward(); // Verify backward links
+
+    return 0;
+}
+19. Binary Search Tree (Insert, In-order Traversal)#include <iostream>
+
+// Node structure for the Binary Search Tree (BST)
+struct TreeNode {
+    int data;
+    TreeNode* left;
+    TreeNode* right;
+
+    TreeNode(int val) : data(val), left(nullptr), right(nullptr) {}
+};
+
+class BST {
+private:
+    TreeNode* root;
+
+    // Helper function for recursive insertion
+    TreeNode* insertRecursive(TreeNode* node, int data) {
+        // If the tree/subtree is empty, create a new node
+        if (node == nullptr) {
+            return new TreeNode(data);
+        }
+
+        // Otherwise, recur down the tree
+        if (data < node->data) {
+            node->left = insertRecursive(node->left, data);
+        } else if (data > node->data) {
+            node->right = insertRecursive(node->right, data);
+        }
+        // Ignore duplicate values (or handle as needed)
+
+        return node; // Return the (possibly updated) node pointer
+    }
+
+    // Helper function for recursive in-order traversal
+    void inOrderRecursive(TreeNode* node) {
+        if (node != nullptr) {
+            inOrderRecursive(node->left);   // Traverse left subtree
+            std::cout << node->data << " "; // Visit node
+            inOrderRecursive(node->right);  // Traverse right subtree
+        }
+    }
+
+     // Helper function for recursive deletion (to prevent memory leaks)
+    void destroyRecursive(TreeNode* node) {
+        if (node) {
+            destroyRecursive(node->left);
+            destroyRecursive(node->right);
+            delete node;
+        }
+    }
+
+
+public:
+    // Constructor
+    BST() : root(nullptr) {}
+
+     // Destructor
+    ~BST() {
+        destroyRecursive(root);
+    }
+
+
+    // Public function to insert data
+    void insert(int data) {
+        root = insertRecursive(root, data);
+         std::cout << data << " inserted into BST." << std::endl;
+    }
+
+    // Public function to perform in-order traversal
+    void inOrderTraversal() {
+        if (root == nullptr) {
+             std::cout << "BST is empty." << std::endl;
+             return;
+        }
+        std::cout << "In-order Traversal: ";
+        inOrderRecursive(root);
+        std::cout << std::endl;
+    }
+};
+
+int main() {
+    BST bst;
+
+    bst.insert(50);
+    bst.insert(30);
+    bst.insert(70);
+    bst.insert(20);
+    bst.insert(40);
+    bst.insert(60);
+    bst.insert(80);
+
+    bst.inOrderTraversal(); // Should print: 20 30 40 50 60 70 80
+
+    return 0;
+}
+20. Graph Representation using Adjacency Matrix
+#include <iostream>
+#include <vector>
+
+class GraphAdjMatrix {
+private:
+    int numVertices;
+    std::vector<std::vector<int>> adjMatrix; // 2D vector for the matrix
+
+public:
+    // Constructor
+    GraphAdjMatrix(int vertices) : numVertices(vertices) {
+        // Initialize the matrix with zeros
+        adjMatrix.resize(numVertices, std::vector<int>(numVertices, 0));
+        std::cout << "Graph with " << numVertices << " vertices created." << std::endl;
+    }
+
+    // Add an edge between two vertices (for undirected graph)
+    void addEdge(int src, int dest) {
+        // Validate vertex indices (assuming 0-based indexing)
+        if (src >= 0 && src < numVertices && dest >= 0 && dest < numVertices) {
+            adjMatrix[src][dest] = 1; // Mark edge from src to dest
+            adjMatrix[dest][src] = 1; // Mark edge from dest to src (for undirected)
+            std::cout << "Added edge between " << src << " and " << dest << "." << std::endl;
+        } else {
+            std::cerr << "Error: Invalid vertex index for edge (" << src << ", " << dest << ")." << std::endl;
+        }
+    }
+
+     // Add an edge between two vertices (for directed graph)
+    void addDirectedEdge(int src, int dest) {
+        // Validate vertex indices (assuming 0-based indexing)
+        if (src >= 0 && src < numVertices && dest >= 0 && dest < numVertices) {
+            adjMatrix[src][dest] = 1; // Mark edge from src to dest only
+             std::cout << "Added directed edge from " << src << " to " << dest << "." << std::endl;
+        } else {
+            std::cerr << "Error: Invalid vertex index for edge (" << src << ", " << dest << ")." << std::endl;
+        }
